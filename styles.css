@@ -31,6 +31,9 @@ body{
     height: 100vh;
     display: none;
     transition: opacity .5s;
+    position: fixed;
+    top:0;
+    z-index:1;
 }
 nav{
     width:70%;
@@ -75,26 +78,29 @@ li span{
 .entra-sai{
     background: #DCDCDC;
     line-height: 40px;
-    border-radius: 2px;
+    border-radius: 5px;
     padding-left: 10px;
     display:flex;
     align-items:center;
+    margin-bottom:3px;
 }
 .reservada{
     background: #FFDEDE;
     line-height: 40px;
-    border-radius: 2px;
+    border-radius: 5px;
     padding-left: 10px;
     display:flex;
     align-items:center;
+    margin-bottom:3px;
 }
 .mensagem{
     background: #FFFFFF;
     line-height: 40px;
-    border-radius: 2px;
+    border-radius: 5px;
     padding-left: 10px;
     display:flex;
     align-items:center;
+    margin-bottom:3px;
 }
 .hora{
     color: #AAAAAA;

@@ -1,3 +1,8 @@
+var user=0;
+function pegaUser(){
+    user = prompt("Digite o seu nick:");
+}
+pegaUser();
 function abrirMenu(){
     var menu = document.querySelector("nav");
     menu.style.right="0";
@@ -44,7 +49,7 @@ function criaChat(chats){
         texto.innerText=dados[i].text;
         }
         else{
-            if(dados[i].type=='private-message'){//tenho que adicionar um && checkando se o user do destinatário for o mesmo do que está usando o chat
+            if(dados[i].type=='private_message' && dados[i].to==user){//tenho que adicionar um && checkando se o user do destinatário for o mesmo do que está usando o chat
                 var caixaStatus = document.createElement("div");
                 document.querySelector("section").appendChild(caixaStatus);
                 caixaStatus.classList.add('reservada');
@@ -65,6 +70,11 @@ function criaChat(chats){
                 texto.innerText=dados[i].text;
             }
             else{
+                if(dados[i].type=='private_message')
+                {
+                    
+                }
+                else{
                 var caixaStatus = document.createElement("div");
                 document.querySelector("section").appendChild(caixaStatus);
                 caixaStatus.classList.add('mensagem');
@@ -83,6 +93,7 @@ function criaChat(chats){
                 caixaStatus.appendChild(texto);
                 texto.classList.add('texto');
                 texto.innerText=dados[i].text;
+                }
             }
         }
     }
