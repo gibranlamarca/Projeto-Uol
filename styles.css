@@ -72,7 +72,45 @@ li span{
     padding-bottom:5px;
 }
 
-
+.entra-sai{
+    background: #DCDCDC;
+    line-height: 40px;
+    border-radius: 2px;
+    padding-left: 10px;
+    display:flex;
+    align-items:center;
+}
+.reservada{
+    background: #FFDEDE;
+    line-height: 40px;
+    border-radius: 2px;
+    padding-left: 10px;
+    display:flex;
+    align-items:center;
+}
+.mensagem{
+    background: #FFFFFF;
+    line-height: 40px;
+    border-radius: 2px;
+    padding-left: 10px;
+    display:flex;
+    align-items:center;
+}
+.hora{
+    color: #AAAAAA;
+    margin-right: 5px;
+}
+.nome{
+    font-weight: bold;
+    margin-right: 5px;
+}
+.texto{
+    margin-right: 5px;
+}
+section{
+    padding-top:105px;
+    height:100vh;
+}
 
 
 footer{
