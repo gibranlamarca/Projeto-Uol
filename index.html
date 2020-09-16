@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bate Papo UOL</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <img src="img/logo.png" alt="Logo UOL">
+        <ion-icon name="people" onclick="abrirMenu()"></ion-icon>
+    </header>
+    <section>
+        <div class="escurecer" onclick="fecharMenu()"></div>
+    </section>
+
+    <nav>
+        <p>
+            Escolha um contato para enviar mensagem:
+        </p>
+        <div id="contatos-box">
+            <ul id="contatos">
+                <li>
+                    <ion-icon name="people"></ion-icon>
+                    <span>Todos</span>
+                </li>
+            </ul>
+        </div>
+        <div id="visibilidade-box">
+            <p>
+                Escolha a visibilidade:
+            </p>
+            <ul id="visibilidade">
+                <li>
+                    <ion-icon name="lock-open"></ion-icon>
+                    <span>Público</span>
+                </li>
+                <li>
+                    <ion-icon name="lock-closed"></ion-icon>
+                    <span>Reservadamente</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+    <footer>
+        <div>
+            <input type="text" placeholder="Escreva aqui...">
+            <p>Enviando para Todos</p>
+        </div>
+        <ion-icon name="paper-plane-outline"></ion-icon>
+    </footer>
+    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
