@@ -3,6 +3,7 @@ var pegaInput = 0;
 var tamanhoArray = 0;
 var destino = "Todos";
 var tipo = "message";
+var marcado = "Todos";
 
 function pegaUser(){
     user.name = prompt("Digite o seu nick:");
@@ -62,21 +63,9 @@ function criaChat(chats){
                 document.querySelector("section").appendChild(caixaStatus);
                 caixaStatus.classList.add('reservada');
 
-                var hora = document.createElement("time");
-                caixaStatus.appendChild(hora);
-                hora.classList.add('hora');
-                hora.innerText="("+dados[i].time+")";
-
-                var nome = document.createElement("h1");
-                caixaStatus.appendChild(nome);
-                nome.classList.add('nome');
-                nome.innerText=dados[i].from;
-
-                var texto = document.createElement("p");
-                caixaStatus.appendChild(texto);
-                texto.classList.add('texto');
-                texto.innerText=dados[i].text;
-                
+                var mensagem = document.createElement("p");
+                caixaStatus.appendChild(mensagem);
+                mensagem.innerHTML="<span style='color:#AAAAAA'>"+"("+dados[i].time+") "+"</span>"+"<strong>"+dados[i].from+"</strong>"+" "+"para "+"<strong>"+dados[i].to+"</strong>"+":"+" "+dados[i].text;
             }
             else{
                 if(dados[i].type=='private_message')
@@ -97,6 +86,8 @@ function criaChat(chats){
     }
     caixaStatus.scrollIntoView();
 }
+
+//envia chats
 function renderizaChat(){
                 pegaInput = document.querySelector("input").value;
 
@@ -114,7 +105,35 @@ function renderizaChat(){
 }
 function enviaChat(){
     var dados = {from: user.name, to: destino, text: pegaInput, type: tipo};
-    
-    var requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/uol/messages', dados);
 
+    var requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/uol/messages', dados);
+}
+
+//receber usuários online
+function recebeUsuarios(){
+    var requisicao = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/uol/participants');
+    requisicao.then(criaUsuarios);
+}
+
+function criaUsuarios(users){
+    var dados = users.data;
+
+    for(var i=0;i<dados.length;i++){
+    var novoUsuario = document.createElement("li");
+    document.querySelector("ul").appendChild(novoUsuario);
+
+    var icone = document.createElement("ion-icon");
+    novoUsuario.appendChild(icone);
+    icone.setAttribute("name","person-circle");
+
+    var usuario = document.createElement("span");
+    novoUsuario.appendChild(usuario);
+    usuario.innerText=dados[i].name;
+
+    var check = document.createElement("ion-icon");
+    novoUsuario.appendChild(check);
+    check.setAttribute("name","checkmark");
+    check.style.color="green";
+    check.style.display="none";
+    }
 }

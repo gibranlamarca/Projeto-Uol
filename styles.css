@@ -124,7 +124,7 @@ section{
     position: relative;
     bottom: 80px;
 }
-p{
+section p{
     word-break:break-all;
 }
 strong{
