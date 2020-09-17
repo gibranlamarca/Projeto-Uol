@@ -110,6 +110,7 @@ function renderizaChat(){
 
                 caixaStatus.scrollIntoView();
                 enviaChat();
+                document.querySelector("input").value="";
 }
 function enviaChat(){
     var dados = {from: user.name, to: destino, text: pegaInput, type: tipo};
