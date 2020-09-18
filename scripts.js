@@ -3,7 +3,8 @@ var pegaInput = 0;
 var tamanhoArray = 0;
 var destino = "Todos";
 var tipo = "message";
-var marcado = "Todos";
+var marcado = 0;
+var anterior = "Todos";
 
 function pegaUser(){
     user.name = prompt("Digite o seu nick:");
@@ -41,11 +42,12 @@ function buscarDados(){
     var requisicao = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/uol/messages');
     requisicao.then(criaChat);
 }
-//setInterval(buscarDados,5000);
+buscarDados();
+setInterval(buscarDados,5000);
 
 function criaChat(chats){
     var dados = chats.data;
-    console.log(dados);
+    document.querySelector("section").innerHTML="";
     for(var i=0;i<dados.length;i++){
     if(dados[i].type=='status'){
         var caixaStatus = document.createElement("div");
@@ -97,7 +99,7 @@ function renderizaChat(){
 
                 var mensagem = document.createElement("p");
                 caixaStatus.appendChild(mensagem);
-                mensagem.innerHTML="<strong>"+user.name+"</strong>"+" "+"para "+"<strong>"+destino+"</strong>"+":"+" "+pegaInput; //quando clicar em um usuário para mandar a mensagem para ele, vai alterar o valor da variável destino para o nick do usuário destinado
+                mensagem.innerHTML="<strong>"+user.name+"</strong>"+" "+"para "+"<strong>"+destino+"</strong>"+":"+" "+pegaInput; 
 
                 caixaStatus.scrollIntoView();
                 enviaChat();
@@ -114,13 +116,39 @@ function recebeUsuarios(){
     var requisicao = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v1/uol/participants');
     requisicao.then(criaUsuarios);
 }
+recebeUsuarios();
+setInterval(recebeUsuarios,10000);
 
 function criaUsuarios(users){
     var dados = users.data;
+    document.querySelector("ul").innerHTML="";
+
+    var todos = document.createElement("li");
+    document.querySelector("ul").appendChild(todos);
+    todos.setAttribute("onClick","seleciona(this)");
+    var icone = document.createElement("ion-icon");
+    todos.appendChild(icone);
+    icone.setAttribute("name","people");
+    
+    var usuario = document.createElement("span");
+    todos.appendChild(usuario);
+    usuario.innerText="Todos";
+
+    var check = document.createElement("ion-icon");
+    todos.appendChild(check);
+    check.setAttribute("name","checkmark");
+    check.classList.add("check");
+    check.classList.add("invisivel");
+    if(anterior=="Todos"){
+    check.classList.remove("invisivel");
+    check.classList.add("marcado");
+    }
+    
 
     for(var i=0;i<dados.length;i++){
     var novoUsuario = document.createElement("li");
     document.querySelector("ul").appendChild(novoUsuario);
+    novoUsuario.setAttribute("onClick","seleciona(this)");
 
     var icone = document.createElement("ion-icon");
     novoUsuario.appendChild(icone);
@@ -133,7 +161,37 @@ function criaUsuarios(users){
     var check = document.createElement("ion-icon");
     novoUsuario.appendChild(check);
     check.setAttribute("name","checkmark");
-    check.style.color="green";
-    check.style.display="none";
+    check.classList.add("check");
+    check.classList.add("invisivel");
+    if(marcado==usuario.innerText){
+        check.classList.add("marcado");
+        check.classList.remove("invisivel");
+        }
+    }
+}
+
+function seleciona(clicado){
+
+    anterior = document.querySelector(".marcado");
+    anterior.classList.remove("marcado");
+    anterior.classList.add("invisivel");
+
+    marcado = clicado.querySelector("span").innerText;
+    clicado.querySelector(".check").classList.remove("invisivel");
+    clicado.querySelector(".check").classList.add("marcado");
+
+    document.querySelector("#paraQuem").innerText=clicado.innerText;
+    destino = clicado.innerText;
+}
+
+function selecionaVisibilidade(clicado){
+    document.querySelector("#clicado").classList.add("invisivel");
+    document.querySelector("#clicado").removeAttribute("id");
+
+    clicado.querySelector(".check").setAttribute("id","clicado");
+
+    document.querySelector("#clicado").classList.remove("invisivel");
+    if(clicado.innerText=='Reservadamente'){
+        tipo = 'private_message';
     }
 }

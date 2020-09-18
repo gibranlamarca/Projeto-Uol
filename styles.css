@@ -133,6 +133,19 @@ strong{
 .enviar{
     cursor: pointer;
 }
+.check{
+    color:green;
+    margin-left: auto;
+}
+.marcado{
+    display:initial;
+}
+.invisivel{
+    display:none;
+}
+nav{
+    overflow-y: scroll;
+}
 footer{
     height:80px;
     width:100vw;
