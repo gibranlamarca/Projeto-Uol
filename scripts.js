@@ -13,6 +13,11 @@ function pegaUser(){
 pegaUser();
 function enviaUser(){
     var enviar = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/uol/participants',user);
+    enviar.catch(tratarErro);
+}
+function tratarErro(){
+    user.name = prompt("Usuário em uso, por favor escolha outro:");
+    enviaUser();
 }
 function mantemOnline(){
     var enviar = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/uol/status',user);
