@@ -97,7 +97,10 @@ function criaChat(chats){
 //envia chats
 function renderizaChat(){
                 pegaInput = document.querySelector("input").value;
+                if(pegaInput.innerText==""){
 
+                }
+                else{
                 var caixaStatus = document.createElement("div");
                 document.querySelector("section").appendChild(caixaStatus);
                 caixaStatus.classList.add('mensagem');
@@ -109,11 +112,16 @@ function renderizaChat(){
                 caixaStatus.scrollIntoView();
                 enviaChat();
                 document.querySelector("input").value="";
+                }
 }
 function enviaChat(){
     var dados = {from: user.name, to: destino, text: pegaInput, type: tipo};
 
     var requisicao = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v1/uol/messages', dados);
+    requisicao.catch(tratarErroDeEnvio);
+}
+function tratarErroDeEnvio(){
+    window.location.reload();
 }
 
 //receber usuários online
